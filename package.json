@@ -1,0 +1,16 @@
+{
+  "name": "dofa-g2",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "gitlog": "^4.0.4",
+    "npm": "^8.1.4",
+    "package.json": "^2.0.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
