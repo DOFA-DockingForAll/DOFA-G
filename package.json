@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "dependencies": {
+    "git-log-parser": "^1.2.0",
     "gitlog": "^4.0.4",
     "npm": "^8.1.4",
     "package.json": "^2.0.1"
