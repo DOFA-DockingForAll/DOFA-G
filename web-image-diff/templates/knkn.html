@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>DOFA-G</title>
+</head>
+<body>
+<div>
+  <div class="inputoutput">
+    <img id="imageSrc1" alt="No Image" />
+    <img id="imageSrc2" alt="No Image" />
+    <div class="caption">원본 <input type="file" id="fileInput1" name="file" /></div>
+    <div class="caption">수정본 <input type="file" id="fileInput2" name="file" /></div>
+    <div>비교<input type="submit" id="submit" value="비교"/></div>
+    <canvas id="canvasOutput" ></canvas>
+    <div class="caption">canvasOutput</div>
+  </div>
+</div>
+<script type="text/javascript">
+  let imgElement1 = document.getElementById('canvasInput');
+  // let imgElement1 = document.getElementById("imageSrc1");
+  let imgElement2 = document.getElementById("imageSrc2")
+  let inputElement1 = document.getElementById("fileInput1");
+  let inputElement2 = document.getElementById("fileInput2");
+  inputElement1.addEventListener("change", (e) => {
+    imgElement1.src = URL.createObjectURL(e.target.files[0]);
+  }, false);
+  inputElement2.addEventListener("change", (e) => {
+    imgElement2.src = URL.createObjectURL(e.target.files[0]);
+  }, false);
+
+  // imgElement1.onload = function() {
+  //   if(imgElement2.onload){
+  //     let origin = cv.imread(imgElement1);
+  //     let modified = cv.imread(imgElement2);
+  //
+  //     let dst = new cv.Mat();
+  //     cv.cvtColor(origin, dst, cv.COLOR_RGBA2GRAY);
+  //     cv.imshow('canvasOutput', dst);
+  //     //
+  //     // let imageA = cv.resize(origin, dsize=(0, 0), fx=0.5, fy=0.5)
+  //     // let imageB = cv.resize(modified, dsize=(0, 0), fx=0.5, fy=0.5)
+  //
+  //     cv.cvtColor(imageA, cv.COLOR_BGR2GRAY)
+  //     let grayB = cv.cvtColor(imageB, cv.COLOR_BGR2GRAY)
+  //
+  //
+  //
+  //     cv.imshow('canvasOutput', origin);
+  //     mat.delete();
+  //   }
+  // imgElement.onload = function() {
+    /* 기존코드 (동일한그림 보여주기)
+      let mat = cv.imread(imgElement);
+      cv.imshow('canvasOutput', mat);
+      mat.delete();
+    */
+// 수정한 코드 (색값 변경)
+  imgElement1.onload = function() {
+    let src = cv.imread('canvasInput');
+    let dst = new cv.Mat();
+    cv.cvtColor(src, dst, cv.COLOR_RGBA2GRAY);
+    cv.imshow('canvasOutput', dst);
+    src.delete();
+    dst.delete();
+  };
+  function onOpenCvReady() {
+    document.getElementById('status').innerHTML = 'OpenCV.js is ready.';
+  }
+</script>
+<script async src="opencv.js" onload="onOpenCvReady();" type="text/javascript"></script>
+</body>
+</html>

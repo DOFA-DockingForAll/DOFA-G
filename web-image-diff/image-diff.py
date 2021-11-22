@@ -1,30 +1,18 @@
-# from skimage.measure import compare_ssim
+# from skimage.measure import compare_ssim 
 
-from flask import Flask, render_template
+from flask import Flask, render_template, request
     
 from skimage.metrics import structural_similarity as compare_ssim
 import imutils
 import cv2
 import numpy as np
-import argparse
 
-app = Flask(__name__)
-#imagea = cv2.imread("./img/original.png")
-#imageb = cv2.imread("./img/modified.png")
-
-#@app.route('/image_diff/<original>/<modified>')
-#@app.route('/image_diff')
-#def image_diff(original, modified):
-def main():
+def image_diff():
     imagea = cv2.imread("./img/original.png")
     imageb = cv2.imread("./img/modified.png")
-    #imagea = cv2.imread(original)
-    #imageb = cv2.imread(modified)
     
     imageA = cv2.resize(imagea, dsize=(0, 0), fx=0.5, fy=0.5)
     imageB = cv2.resize(imageb, dsize=(0, 0), fx=0.5, fy=0.5)
-    #cv2.imshow(imageA)
-    #cv2.imshow(imageB)
     # cv2.waitKey(0)
     
     grayA = cv2.cvtColor(imageA, cv2.COLOR_BGR2GRAY)
@@ -32,7 +20,11 @@ def main():
     (score, diff) = compare_ssim(grayA, grayB, full=True)
     diff = (diff * 255).astype("uint8")
     #print(f"SSIM: {score}")
-    
+    cv2.imshow("A", grayA)
+    cv2.imshow("B", grayB)
+    cv2.imshow("diff",diff)
+
+    #외각선 검출
     thresh = cv2.threshold(
                  diff, 0, 200, 
                  cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU
@@ -43,6 +35,7 @@ def main():
                 cv2.RETR_EXTERNAL, 
                 cv2.CHAIN_APPROX_SIMPLE
               )
+    cv2.imshow("thresh",thresh)
     for c in cnts:
         area = cv2.contourArea(c)
         if area > 40:
@@ -50,10 +43,11 @@ def main():
             #cv2.rectangle(imageA, (x, y), (x + w, y + h), (0, 0, 255), 2)
             cv2.drawContours(imageB, [c], -1, (0, 0, 255), 2)
     #cv2.imshow("Original", imageA)
-    #cv2.imshow("Modified", imageB)
+    cv2.imshow("Modified", imageB)
     #cv2.waitKey(0)
-    cv2.imwrite(', imageA)
-    cv2.imwrite('result_modified.jpg', imageB)
+    #cv2.imwrite('./result/result_original.jpg', imageA)
+    #cv2.imwrite('./result/result_modified.jpg', imageB)
+
     
 if __name__ == "__main__":
-    main()
+    image_diff()

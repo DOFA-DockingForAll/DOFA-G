@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOFA-G</title>
+    <style>
+        .logo-box a {
+            display: block;
+            width: 412px;
+            height: 48px;
+            background: url(../img/dofa-g-logo.png) no-repeat top left/contain;
+            text-indent: -9999px;
+            transition-delay: .4s;
+        }
+        #output img{
+            width:45%;
+            height:45%;
+            padding: 40px 25px;
+        }
+        #input-ori, input-modi, submit{
+            padding: 6px 25px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="in">
+            <h1 class="logo-box">
+                <a href="main.html"></a>
+            </h1>
+        </div>
+    </header>
+    <div id = "input">
+        <label>임시로 파일 선택하는 버튼 입니다.</label>
+        <br>
+        <form action="/imagediff">
+            <input type="file" id="input-ori" value="원본" name="original" accept="image/*" required/>
+            <input type="file" id="input-modi" value="수정" name="modified" accept="image/*" required/>
+            <input type="submit" id="submit" value="비교"/>
+        </form>
+    </div>
+    <div id="output">
+        <img class = "original" src="../img/original.png" alt="original">
+        <img class = "modified" src="../result/result_modified.jpg" alt="modified">
+<!--        <img src="{{url_for('image_diff')}}" width="100%">-->
+    </div>
+</body>
+</html>
+<script>
+</script>
