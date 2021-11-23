@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>git-viewer</title>
+</head>
+<body>
+<div id="demo"></div>
+</body>
+</html>
+
+<script type="text/javascript">
+
+    let xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function () {
+        if(xhttp.readyState == 4 && xhttp.status == 200){
+            jsonfunc(this.responseText); //this = xhttp
+//		jsonfunc(xhttp.responseText); // 둘다 가능
+        }
+    }
+    xhttp.open("GET","./_tmp/gitlogg.json", true);
+    xhttp.send();
+
+    function jsonfunc( jsonText ) {
+
+        let json = JSON.parse(jsonText); // String -> json으로 변환
+
+        let txt = "";
+        // 접근법bb
+        // for(i=0; i<json.length; i++){
+        //     for(key in json[i]){ // key값 가져오기
+        //         txt += key + ":" + json[i][key];
+        //     }
+        //     txt += "<br>";
+        // }
+        // 접근법 2
+        // for(i=0; i<json.length; i++){
+        //     txt += "COMMIT " + (i + 1) + "<br>" + "HASHCODE : " +json[i].commit + "<br>" + "AUTHOR : " + json[i].author + "<br>" +
+        //         "DATE : " +json[i].date+ "<br>" + "MSG : " + json[i].message + "<br>"+ "<br>";
+        // }
+        // document.getElementById('demo').innerHTML = txt;
+        //html꾸미기
+        for(i=0; i<json.length; i++){
+            txt += "<p class = 'commit_num'>" + "COMMIT " + (i + 1) + "</p>" +
+            "<p class = 'hashcode'>" + "HASHCODE : " +json[i].commit + "</p>" +
+                "<p class = 'author'>" + "AUTHOR : " + json[i].author + "</p>" +
+                "<p class = 'date'>" + "DATE : " +json[i].date+ "</p>" +
+                "<p class = 'msg'>" + "MSG : " + json[i].message + "</p>"+ "<br>";
+        }
+        document.getElementById('demo').innerHTML = txt;
+    }
+</script>
