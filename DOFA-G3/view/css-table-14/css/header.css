@@ -1,0 +1,8 @@
+.logo-box a {
+    display: block;
+    width: 180px;
+    height: 75px;
+    background: url(../../img/dofa-g-logo.png) no-repeat top left/contain;
+    text-indent: -9999px;
+    transition-delay: .4s;
+}

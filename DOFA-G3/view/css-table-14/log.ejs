@@ -1,0 +1,69 @@
+<%- include('header') %>
+<!DOCTYPE html>
+ <html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css-table-14/fonts/icomoon/style.css" type="text/css">
+
+    <link rel="stylesheet" href="/css-table-14/css/owl.carousel.min.css" type="text/css">
+
+<!--     Bootstrap CSS -->
+    <link rel="stylesheet" href="/css-table-14/css/bootstrap.min.css" type="text/css">
+
+<!--     Style -->
+    <link rel="stylesheet" href="/css-table-14/css/style.css" type="text/css">
+
+    <title>Table #4</title>
+  </head>
+  <body>
+  <div class="content">
+    <div class="container">
+      <h2 class="mb-5">파일 버전 로그</h2>
+
+      <div class="table-responsive custom-table-responsive">
+
+        <table class="table custom-table">
+          <thead>
+            <tr>
+              <th scope="col">
+                </label>
+              </th>
+              <th scope="col">Commit Message</th>
+              <th scope="col">Name</th>
+              <th scope="col">Date</th>
+            </tr>
+          </thead>
+          <tbody>
+                <% for(var i=0; i < json.length; i++){ %>
+                <tr scope="row">
+                    <td>
+                      <label class="control control--checkbox">
+                        <input type="checkbox"  class="js-check-all"/>
+                        <div class="control__indicator"></div>
+                      </label>
+                    </td>
+                      <td>
+                        <%= json[i].message %>
+                      </td>
+                      <td><a href="#"><%= json[i].author %></a></td>
+                      <td>
+                        <%= json[i].date %>
+                      </td>
+                </tr>
+                <% } %>
+          </tbody>
+        </table>
+      </div>
+        <button class="button-19" role="button">버전 비교하기</button>
+    </div>
+  </div>
+<!--    <script src="js/jquery-3.3.1.min.js"></script>-->
+<!--    <script src="js/popper.min.js"></script>-->
+<!--    <script src="js/bootstrap.min.js"></script>-->
+    <script src="/css-table-14/js/main.js"></script>
+  <script>checkBox();</script>
+  </body>
+</html>
